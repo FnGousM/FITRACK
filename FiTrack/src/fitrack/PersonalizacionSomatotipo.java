@@ -4,6 +4,7 @@ package fitrack;
  * Demostración de ListView 
  */
  
+
 import javafx.application.*; 
 import javafx.scene.*; 
 import javafx.stage.*; 
@@ -14,6 +15,8 @@ import javafx.beans.value.*;
 import javafx.collections.*; 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -43,7 +46,7 @@ public class PersonalizacionSomatotipo extends Application {
     // Usa un FlowPane para el nodo raiz.   
     // Vertical y horizontalmente espacios de 10.
     FlowPane rootNode = new FlowPane(10, 7); 
-    FlowPane rootNode2=new FlowPane(Orientation.HORIZONTAL);
+   //FlowPane rootNode2=new FlowPane(Orientation.HORIZONTAL);
     // Centrar controles en el nodo raíz 
     rootNode.setAlignment(Pos.TOP_CENTER); 
    // rootNode.setAlignment(Pos.); 
@@ -53,7 +56,11 @@ public class PersonalizacionSomatotipo extends Application {
     // Pone la escena en el escenario 
     myStage.setScene(myScene); 
     raiz = new BorderPane();
-    
+    Image im1=new Image("somatotipo.jpg");
+    ImageView im= new ImageView();
+    im.setImage(im1);
+    im.setFitWidth(250);
+    im.setFitHeight(100);
     // Crea la etiqueta
     TEST=new Button("TEST");
     TEST.setTextFill(Color.web("#FFFFFF"));
@@ -101,7 +108,7 @@ public class PersonalizacionSomatotipo extends Application {
     }); 
  
     // Inserta la lista y la etiqueta al grafo de la escena 
-    rootNode.getChildren().addAll(titulo,somatotipo, fCuerpo,TEST,textbaj,separador,atras,separador2,siguiente); 
+    rootNode.getChildren().addAll(titulo,somatotipo, fCuerpo,im,TEST,textbaj,separador,atras,separador2,siguiente); 
  
     // Muestra el escenario y su escena 
     myStage.show(); 
