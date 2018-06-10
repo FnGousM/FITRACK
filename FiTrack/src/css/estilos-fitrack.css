@@ -1,0 +1,66 @@
+.button{
+    -fx-text-fill: #fff;
+    -fx-background-color: transparent;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+.center-root{
+    -fx-alignment: top-center;
+}
+.center-sup-root{
+    -fx-alignment: center;
+    -fx-padding: 0 0 10 0;
+}
+.center-inf-root{
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+.combo-box{
+    -fx-background-color: #fff;
+    -fx-cursor: hand;
+}
+.label{
+    -fx-text-fill: #000;
+    -fx-font-size: 18px;
+    -fx-padding: 10 0 10 0;
+}
+.label-in-radio{
+    -fx-text-fill: #444;
+    -fx-font-size: 13px;
+    -fx-padding: 2 0 10 30;
+}
+.main-root{
+    -fx-padding: 20 0 40 0;
+}
+.radio-button{
+    -fx-text-fill: #000;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+.root{
+    -fx-background-color: linear-gradient(to bottom,#09bfea,#207dab);
+    -fx-font-weight: bold;
+    /*No supe que tipo de fuente usaste xd
+    -fx-font-family: 'Bodoni MT';*/
+}
+.subtitle{
+    -fx-text-fill: #000;
+    -fx-font-weight: bold;
+    -fx-font-size: 17px;
+    -fx-padding: 0 0 10 0;
+}
+.text-field{
+    -fx-max-width: 200;
+    -fx-cursor: hand;
+    -fx-border-radius: 100;
+}
+.title{
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-padding: 0 0 10 0;
+    
+}
+.top-root{
+    -fx-alignment: top-center;
+}
