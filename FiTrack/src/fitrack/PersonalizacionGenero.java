@@ -25,6 +25,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -33,36 +34,33 @@ import javafx.stage.Stage;
  */
 public class PersonalizacionGenero extends Application {
     
-    Label lbTitulo, lbGenero, lbNacimiento, lbEstatura; 
+   // Label lbTitulo, lbGenero, lbNacimiento, lbEstatura; 
     RadioButton rbHombre, rbMujer;
     DatePicker fecha;
-    TextField tfEstatura;
-    ObservableList<String> tipos; 
-    ComboBox<String> cbEstatura;
-    Button atras,siguiente;
+    //TextField tfEstatura;
+    //ObservableList<String> tipos; 
+    //ComboBox<String> cbEstatura;
+    //Button atras,siguiente;
 
     
     @Override
     public void start(Stage escenario) {
         escenario.setTitle("Personalizacion de genero");
-        //Crea un BorderPane para poder colocar los elementos y los botones en su posicion requerida         
+        //Crea un FlowPane      
         FlowPane raiz = new FlowPane();
+        raiz.setAlignment(Pos.TOP_CENTER); 
         //Crea una escena
         Scene escena = new Scene(raiz, 270, 480);
         
         //Añade la escena al escenario
         escenario.setScene(escena);
         
-        //Crea los controles de las posiciones del BorderPane
         //Arriba
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
-                
-        Separator separador=new Separator();
-        separador.setPrefSize(270, 0);
-        separador.setVisible(false);
-            
+        lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
         //Centro
         Label lbGenero = new Label("Escoge tu genero");
+        lbGenero.setFont(new Font("Arial Rounded MT Bold", 14));
         
         rbHombre.setGraphic(new ImageView("hombre.jpg"));
         rbHombre.setAlignment(Pos.CENTER_LEFT);
@@ -70,19 +68,16 @@ public class PersonalizacionGenero extends Application {
         rbMujer.setGraphic(new ImageView("mujer.jpg"));
         rbMujer.setAlignment(Pos.CENTER_RIGHT);
         
-        Separator separador2 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
-        
         //Agrega metodo de DatePicker
         iniciarFecha();
         
         Label lbEstatura = new Label("Estatura");
+        lbEstatura.setFont(new Font("Arial Rounded MT Bold", 14));
         TextField tfEstatura = new TextField(" ");
         
         Separator separador3 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
+        separador3.setPrefSize(270, 100);
+        separador3.setVisible(false);
         
         ObservableList<String> unidad =
         FXCollections.observableArrayList("CM", "FT");  
@@ -99,24 +94,25 @@ public class PersonalizacionGenero extends Application {
         }); 
                 
         Separator separador4 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
+        separador4.setPrefSize(70, 0);
+        separador4.setVisible(false);
         
         //Abajo
         //Crea boton atras
         Button atras= new Button("Atras");
         atras.setTextFill(Color.BLUE);
         atras.setPrefSize(60, 10);
-        atras.setAlignment(Pos.BOTTOM_LEFT);
+        atras.setLayoutX(10);
+        atras.setLayoutY(450);
         
         //Crea boton siguiento
         Button siguiente= new Button("Siguiente");
         siguiente.setTextFill(Color.BLUE);
         siguiente.setPrefSize(60, 10);
-        siguiente.setAlignment(Pos.BOTTOM_RIGHT);
+        siguiente.setAlignment(Pos.BOTTOM_LEFT);
      
-        raiz.getChildren().addAll(lbTitulo, separador, lbGenero, rbHombre, rbMujer, separador2, lbNacimiento, fecha, separador3, lbEstatura,
-                tfEstatura, cbEstatura, separador4, atras, siguiente); 
+        raiz.getChildren().addAll(lbTitulo, lbGenero, rbHombre, rbMujer, fecha, lbEstatura,
+                tfEstatura, cbEstatura, separador3, atras, separador4, siguiente); 
         escenario.show();
     }
     

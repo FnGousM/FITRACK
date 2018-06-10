@@ -11,23 +11,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -36,34 +32,32 @@ import javafx.stage.Stage;
  */
 public class PersonalizacionMasa extends Application {
     
-    Label lbTitulo, lbPeso, lbPorcentaje; 
+    /*Label lbTitulo, lbPeso, lbPorcentaje; 
     TextField tfPeso, tfPorcentaje;
     ObservableList<String> unidad; 
     ComboBox<String> cbPeso;
-    Button atras,siguiente;
+    Button atras,siguiente;*/
 
     
     @Override
     public void start(Stage escenario) {
         escenario.setTitle("Personalizacion de genero");
-        //Crea un BorderPane para poder colocar los elementos y los botones en su posicion requerida         
-        FlowPane raiz = new FlowPane();
+        //Crea un FlowPane
+        FlowPane raiz = new FlowPane(); 
+        raiz.setAlignment(Pos.TOP_CENTER); 
         //Crea una escena
         Scene escena = new Scene(raiz, 270, 480);
         
         //Añade la escena al escenario
         escenario.setScene(escena);
         
-        //Crea los controles de las posiciones del BorderPane
         //Arriba
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
-                
-        Separator separador=new Separator();
-        separador.setPrefSize(270, 0);
-        separador.setVisible(false);
-            
+        lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
+                          
         //Centro
         Label lbPeso = new Label("Peso");
+        lbPeso.setFont(new Font("Arial Rounded MT Bold", 14));
         TextField tfPeso = new TextField(" ");
         
         ObservableList<String> unidad =
@@ -79,41 +73,45 @@ public class PersonalizacionMasa extends Application {
     	  
             } 
         }); 
-        
-        Separator separador2 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
-        
+               
         Label lbPorcentaje = new Label("Porcentaje de grasa");
+        lbPorcentaje.setFont(new Font("Arial Rounded MT Bold", 14));
+        
         TextField tfPorcentaje = new TextField(" ");
-        
-        Separator separador3 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
-        
+                
         Image porcentaje = new Image("porcentaje.jpg");
         ImageView ivPorcentaje= new ImageView();
         ivPorcentaje.setImage(porcentaje);
         ivPorcentaje.setFitWidth(250);
         ivPorcentaje.setFitHeight(200);
         
+        //Crea separadores
+        Separator separador = new Separator();
+        separador.setPrefSize(270, 10);
+        separador.setValignment(VPos.BOTTOM);
+        
+        Separator separador3 = new Separator();
+        separador3.setPrefSize(270, 100);
+        separador3.setValignment(VPos.BOTTOM);
+        
         Separator separador4 = new Separator();
-        separador2.setPrefSize(270, 0);
-        separador2.setVisible(false);
+        separador4.setValignment(VPos.BOTTOM);
+        separador4.setPrefSize(70, 0);
         
         //Crea boton atras
         Button atras= new Button("Atras");
         atras.setTextFill(Color.BLUE);
         atras.setPrefSize(60, 10);
-        atras.setAlignment(Pos.BOTTOM_LEFT);
+        atras.setLayoutX(10);
+        atras.setLayoutY(450);
         
         //Crea boton siguiento
-        Button siguiente= new Button("Siguiente");
+        Button siguiente = new Button("Siguiente");
         siguiente.setTextFill(Color.BLUE);
-        siguiente.setPrefSize(60, 10);
-        siguiente.setAlignment(Pos.BOTTOM_RIGHT);
+        siguiente.setPrefSize(80, 10);
+        siguiente.setAlignment(Pos.BOTTOM_LEFT);
                 
-                
+        raiz.getChildren().addAll(lbTitulo,separador, lbPeso, separador, tfPeso, separador, cbEstatura, separador, lbPorcentaje, separador, tfPorcentaje, separador, ivPorcentaje, separador3, atras, separador4, siguiente);
         escenario.show();
     }
     
