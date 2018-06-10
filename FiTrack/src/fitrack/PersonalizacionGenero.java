@@ -115,8 +115,8 @@ public class PersonalizacionGenero extends Application {
         siguiente.setPrefSize(60, 10);
         siguiente.setAlignment(Pos.BOTTOM_RIGHT);
      
-        raiz.getChildren().addAll(lbTitulo, lbGenero, rbHombre, rbMujer, lbNacimiento, fecha, lbEstatura,
-                tfEstatura, cbEstatura, atras, siguiente); 
+        raiz.getChildren().addAll(lbTitulo, separador, lbGenero, rbHombre, rbMujer, separador2, lbNacimiento, fecha, separador3, lbEstatura,
+                tfEstatura, cbEstatura, separador4, atras, siguiente); 
         escenario.show();
     }
     
