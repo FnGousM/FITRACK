@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
@@ -42,48 +43,63 @@ public class PersonalizacionMasa extends Application {
     @Override
     public void start(Stage escenario) {
         escenario.setTitle("Personalizacion de genero");
+        
         //Crea un FlowPane
-        FlowPane raiz = new FlowPane(); 
-        raiz.setAlignment(Pos.TOP_CENTER); 
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10); 
+        root.setAlignment(Pos.CENTER); 
+        
         //Crea una escena
-        Scene escena = new Scene(raiz, 270, 480);
+        Scene escena = new Scene(root, 270, 480);
+        
+        //Añade hoja de estilos
+        escena.getStylesheets().add("css/Estilo.css");
         
         //Añade la escena al escenario
         escenario.setScene(escena);
         
-        //Arriba
+        //Etiqueta para el titulo
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
         lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
                           
-        //Centro
+        //Etiqueta para el peso
         Label lbPeso = new Label("Peso");
         lbPeso.setFont(new Font("Arial Rounded MT Bold", 14));
-        TextField tfPeso = new TextField(" ");
         
+        //Crea una caja de texto
+        TextField tfPeso = new TextField(" ");
+        tfPeso.setPrefSize(80, 10);
+        
+        //Crea una lista observable para el combo box
         ObservableList<String> unidad =
         FXCollections.observableArrayList("KG", "LB");  
-                
-        ComboBox<String> cbEstatura = new ComboBox<String>(unidad);
-        cbEstatura.setPrefWidth(50);
-        cbEstatura.setValue(unidad.get(0));
         
-        // Escuchado de acción para la combo box. 
-        cbEstatura.setOnAction(new EventHandler<ActionEvent>() { 
+        //Crea el combo box
+        ComboBox<String> cbPeso = new ComboBox<String>(unidad);
+        cbPeso.setPrefWidth(80);
+        
+        //Inicializa el combo box
+        cbPeso.setValue("KG");
+        
+        // Escuchador de acción para la combo box. 
+        cbPeso.setOnAction(new EventHandler<ActionEvent>() { 
             public void handle(ActionEvent ae) { 
     	  
             } 
         }); 
                
+        //Etiqueta para el porcentaje
         Label lbPorcentaje = new Label("Porcentaje de grasa");
         lbPorcentaje.setFont(new Font("Arial Rounded MT Bold", 14));
         
+        //Crea una caja de texto
         TextField tfPorcentaje = new TextField(" ");
-                
-        Image porcentaje = new Image("porcentaje.jpg");
-        ImageView ivPorcentaje= new ImageView();
-        ivPorcentaje.setImage(porcentaje);
-        ivPorcentaje.setFitWidth(250);
-        ivPorcentaje.setFitHeight(200);
+        tfPorcentaje.setPrefSize(80, 10);
+        
+        //Crea la imagen
+        Image porcentaje = new Image("images/porcentaje.png");
+        
+        //Crea un imageview que usa la imagen
+        ImageView ivPorcentaje= new ImageView(porcentaje);
         
         //Crea separadores
         Separator separador = new Separator();
@@ -96,7 +112,7 @@ public class PersonalizacionMasa extends Application {
         
         Separator separador4 = new Separator();
         separador4.setValignment(VPos.BOTTOM);
-        separador4.setPrefSize(70, 0);
+        separador4.setPrefSize(0, 0);
         
         //Crea boton atras
         Button atras= new Button("Atras");
@@ -111,7 +127,7 @@ public class PersonalizacionMasa extends Application {
         siguiente.setPrefSize(80, 10);
         siguiente.setAlignment(Pos.BOTTOM_LEFT);
                 
-        raiz.getChildren().addAll(lbTitulo,separador, lbPeso, separador, tfPeso, separador, cbEstatura, separador, lbPorcentaje, separador, tfPorcentaje, separador, ivPorcentaje, separador3, atras, separador4, siguiente);
+        root.getChildren().addAll(lbTitulo, lbPeso, tfPeso, cbPeso, lbPorcentaje, tfPorcentaje, ivPorcentaje, separador3, atras, siguiente);
         escenario.show();
     }
     

@@ -11,15 +11,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -34,57 +37,71 @@ import javafx.stage.Stage;
  */
 public class PersonalizacionGenero extends Application {
     
-   // Label lbTitulo, lbGenero, lbNacimiento, lbEstatura; 
+    Label lbTitulo, lbGenero, lbNacimiento, lbEstatura; 
     RadioButton rbHombre, rbMujer;
     DatePicker fecha;
-    //TextField tfEstatura;
-    //ObservableList<String> tipos; 
-    //ComboBox<String> cbEstatura;
-    //Button atras,siguiente;
+    TextField tfEstatura;
+    ObservableList<String> tipos; 
+    ComboBox<String> cbEstatura;
+    Button atras,siguiente;
 
     
     @Override
     public void start(Stage escenario) {
         escenario.setTitle("Personalizacion de genero");
         //Crea un FlowPane      
-        FlowPane raiz = new FlowPane();
-        raiz.setAlignment(Pos.TOP_CENTER); 
+        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10);
+        root.setAlignment(Pos.CENTER); 
         //Crea una escena
-        Scene escena = new Scene(raiz, 270, 480);
+        Scene escena = new Scene(root, 270, 480);
+        
+        //Añade hoja de estilos
+        escena.getStylesheets().add("css/Estilo.css");
         
         //Añade la escena al escenario
         escenario.setScene(escena);
         
-        //Arriba
+        //Etiqueta titulo
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
         lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
-        //Centro
+        
+        //Etiqueta genero
         Label lbGenero = new Label("Escoge tu genero");
         lbGenero.setFont(new Font("Arial Rounded MT Bold", 14));
         
-        rbHombre.setGraphic(new ImageView("hombre.jpg"));
+        //Crea los Radio Buttons
+        rbHombre = new RadioButton("HOMBRE");
+        rbMujer = new RadioButton("MUJER");
+        
+        //Solo se ve laimagen en los Radio Buttons
+        rbHombre.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        rbMujer.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        
+        //Añade la imagen a a los Radio Buttons
+        rbHombre.setGraphic(new ImageView("images/hombre.png"));
         rbHombre.setAlignment(Pos.CENTER_LEFT);
         
-        rbMujer.setGraphic(new ImageView("mujer.jpg"));
+        rbMujer.setGraphic(new ImageView("images/mujer.png"));
         rbMujer.setAlignment(Pos.CENTER_RIGHT);
-        
+                
         //Agrega metodo de DatePicker
         iniciarFecha();
         
+        //Etiqueta estatura
         Label lbEstatura = new Label("Estatura");
         lbEstatura.setFont(new Font("Arial Rounded MT Bold", 14));
         TextField tfEstatura = new TextField(" ");
         
-        Separator separador3 = new Separator();
-        separador3.setPrefSize(270, 100);
-        separador3.setVisible(false);
-        
+        //Crea una lista observable para el combo box
         ObservableList<String> unidad =
         FXCollections.observableArrayList("CM", "FT");  
-               
+        
+        //Crea el combo box
         ComboBox<String> cbEstatura = new ComboBox<String>(unidad);
-        cbEstatura.setPrefWidth(50);
-        cbEstatura.setValue(unidad.get(0));
+        cbEstatura.setPrefWidth(80);
+        
+        //Inicializa el combo box
+        cbEstatura.setValue("CM");
         
         // Escuchado de acción para la combo box. 
         cbEstatura.setOnAction(new EventHandler<ActionEvent>() { 
@@ -92,12 +109,16 @@ public class PersonalizacionGenero extends Application {
     	  
             } 
         }); 
-                
+            
+        //Crea los separadores
+        Separator separador3 = new Separator();
+        separador3.setPrefSize(270, 100);
+        separador3.setVisible(false);
+        
         Separator separador4 = new Separator();
         separador4.setPrefSize(70, 0);
         separador4.setVisible(false);
         
-        //Abajo
         //Crea boton atras
         Button atras= new Button("Atras");
         atras.setTextFill(Color.BLUE);
@@ -105,13 +126,13 @@ public class PersonalizacionGenero extends Application {
         atras.setLayoutX(10);
         atras.setLayoutY(450);
         
-        //Crea boton siguiento
+        //Crea boton siguiente
         Button siguiente= new Button("Siguiente");
         siguiente.setTextFill(Color.BLUE);
-        siguiente.setPrefSize(60, 10);
+        siguiente.setPrefSize(80, 10);
         siguiente.setAlignment(Pos.BOTTOM_LEFT);
      
-        raiz.getChildren().addAll(lbTitulo, lbGenero, rbHombre, rbMujer, fecha, lbEstatura,
+        root.getChildren().addAll(lbTitulo, lbGenero, rbHombre, rbMujer, fecha, lbEstatura,
                 tfEstatura, cbEstatura, separador3, atras, separador4, siguiente); 
         escenario.show();
     }
