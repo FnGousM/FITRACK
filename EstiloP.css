@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 7/06/2018, 07:00:09 PM
+    Author     : FnMoises
+*/
+/*background primeros pasos REGISTRO*/
+
+.root{
+    -fx-background-color: linear-gradient(to bottom, rgba(1,218,251,1) 0%, rgba(46,128,251,1) 100%);
+    
+}
+
+
+.combo-box-base {
+/*    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;*/
+     -fx-background-color:#ffffff ;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 4px, 4px, 3px, 2px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: CENTER;
+}
+
+
+
+#test {
+   
+   -fx-padding: 10;
+   -fx-font-weight: 600;
+    -fx-font-size: 14px;
+    -fx-color: #ffffff;
+   -fx-border-radius: 6px;
+    -fx-border: 2px solid #0016b0;
+   -fx-background-color: #09c809;
+   -fx-text-fill: #ffffff;
+   -fx-alignment: center ;
+    
+
+}
+
+#test:hover  {
+  -fx-color: #1883ba;
+   -fx-border-color: #09c809;
+    -fx-background-color: #ffffff;
+    -fx-text-fill:#354970 ;
+}
+
+#nextback {
+   -fx-border-width: 2;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+    -fx-color: none;
+   -fx-border-radius: 0;
+    -fx-border: 2px solid #0016b0;
+   -fx-background-color: none;
+   -fx-text-fill: #ffffff;
+   -fx-alignment: center ;
+    
+
+}
