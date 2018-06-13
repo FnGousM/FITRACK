@@ -22,7 +22,11 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -32,39 +36,17 @@ import javafx.stage.Stage;
  * @author Mauricio
  */
 public class PersonalizacionMasa extends Application {
-    
-    /*Label lbTitulo, lbPeso, lbPorcentaje; 
-    TextField tfPeso, tfPorcentaje;
-    ObservableList<String> unidad; 
-    ComboBox<String> cbPeso;
-    Button atras,siguiente;*/
-
-    
+       
     @Override
     public void start(Stage escenario) {
         escenario.setTitle("Personalizacion de genero");
         
-        //Crea un FlowPane
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10); 
-        root.setAlignment(Pos.CENTER); 
-        
-        //Crea una escena
-        Scene escena = new Scene(root, 270, 480);
-        
-        //Añade hoja de estilos
-        escena.getStylesheets().add("css/Estilo.css");
-        
-        //Añade la escena al escenario
-        escenario.setScene(escena);
-        
         //Etiqueta para el titulo
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
-        lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
                           
         //Etiqueta para el peso
         Label lbPeso = new Label("Peso");
-        lbPeso.setFont(new Font("Arial Rounded MT Bold", 14));
-        
+                
         //Crea una caja de texto
         TextField tfPeso = new TextField(" ");
         tfPeso.setPrefSize(80, 10);
@@ -89,45 +71,71 @@ public class PersonalizacionMasa extends Application {
                
         //Etiqueta para el porcentaje
         Label lbPorcentaje = new Label("Porcentaje de grasa");
-        lbPorcentaje.setFont(new Font("Arial Rounded MT Bold", 14));
         
         //Crea una caja de texto
         TextField tfPorcentaje = new TextField(" ");
-        tfPorcentaje.setPrefSize(80, 10);
-        
+                
         //Crea la imagen
         Image porcentaje = new Image("images/porcentaje.png");
         
         //Crea un imageview que usa la imagen
         ImageView ivPorcentaje= new ImageView(porcentaje);
-        
-        //Crea separadores
-        Separator separador = new Separator();
-        separador.setPrefSize(270, 10);
-        separador.setValignment(VPos.BOTTOM);
-        
-        Separator separador3 = new Separator();
-        separador3.setPrefSize(270, 100);
-        separador3.setValignment(VPos.BOTTOM);
-        
-        Separator separador4 = new Separator();
-        separador4.setValignment(VPos.BOTTOM);
-        separador4.setPrefSize(0, 0);
-        
+               
         //Crea boton atras
         Button atras= new Button("Atras");
-        atras.setTextFill(Color.BLUE);
-        atras.setPrefSize(60, 10);
-        atras.setLayoutX(10);
-        atras.setLayoutY(450);
-        
+                
         //Crea boton siguiento
         Button siguiente = new Button("Siguiente");
-        siguiente.setTextFill(Color.BLUE);
-        siguiente.setPrefSize(80, 10);
-        siguiente.setAlignment(Pos.BOTTOM_LEFT);
+        
+        //Layout para la parte superior.
+        VBox topRoot = new VBox(lbTitulo, lbPeso);
+
+        //Layout para la parte de los Radio Buttons
+        HBox centerRoot = new HBox(tfPeso, cbPeso);
+        
+        //Espacio entre los Radio Buttons
+        centerRoot.setSpacing(20);
+        
+        //Layout para el porcentaje de gras, caja de texto y combo box
+        VBox cPor = new VBox(lbPorcentaje, tfPorcentaje, ivPorcentaje);
+        
                 
-        root.getChildren().addAll(lbTitulo, lbPeso, tfPeso, cbPeso, lbPorcentaje, tfPorcentaje, ivPorcentaje, separador3, atras, siguiente);
+        //Layout para la parte inferiror.
+        AnchorPane bottomRoot = new AnchorPane(atras,siguiente);
+       
+        //Layout principal, el cual contendra a los tres layouts anteriores.
+        BorderPane mainRoot = new BorderPane();
+        
+        /*Al utilizar BorderPane como layout princiapl, debemos establecer 
+        la posicion de nuestros layouts secundarios.*/
+        mainRoot.setTop(topRoot);
+        mainRoot.setCenter(centerRoot);
+        mainRoot.setCenter(cPor);
+        mainRoot.setBottom(bottomRoot);
+        
+        //Define la distancia entre los Radio Buttons
+        //Establecemos la destancia entre los botones y las esquinas.
+        AnchorPane.setRightAnchor(atras,10.0);
+        AnchorPane.setLeftAnchor(siguiente,10.0);
+        
+        //Creamos y asociamos las clases css para los controles.
+        mainRoot.getStyleClass().add("main-root");
+        topRoot.getStyleClass().add("top-root");
+        centerRoot.getStyleClass().add("center-root");
+        bottomRoot.getStyleClass().add("bottom-root");
+        lbTitulo.getStyleClass().add("title");
+        lbPorcentaje.getStyleClass().add("subtitle");
+        lbPeso.getStyleClass().add("subtitle");
+        
+        //Crea una escena y se añade el layout principal
+        Scene escena = new Scene(mainRoot, 350, 700);
+        
+        //Añade hoja de estilos
+        escena.getStylesheets().add("css/Estilo.css");
+        
+        //Añade la escena al escenario
+        escenario.setScene(escena);        
+       
         escenario.show();
     }
     

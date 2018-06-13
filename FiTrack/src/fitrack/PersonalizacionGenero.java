@@ -22,10 +22,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -37,38 +41,22 @@ import javafx.stage.Stage;
  */
 public class PersonalizacionGenero extends Application {
     
-    Label lbTitulo, lbGenero, lbNacimiento, lbEstatura; 
     RadioButton rbHombre, rbMujer;
-    DatePicker fecha;
-    TextField tfEstatura;
-    ObservableList<String> tipos; 
-    ComboBox<String> cbEstatura;
-    Button atras,siguiente;
-
-    
+    DatePicker fecha; 
+        
     @Override
     public void start(Stage escenario) {
-        escenario.setTitle("Personalizacion de genero");
-        //Crea un FlowPane      
-        FlowPane root = new FlowPane(Orientation.VERTICAL, 10, 10);
-        root.setAlignment(Pos.CENTER); 
-        //Crea una escena
-        Scene escena = new Scene(root, 270, 480);
-        
-        //Añade hoja de estilos
-        escena.getStylesheets().add("css/Estilo.css");
-        
-        //Añade la escena al escenario
-        escenario.setScene(escena);
-        
+        escenario.setTitle("Personalizacion de genero"); 
+                   
         //Etiqueta titulo
         Label lbTitulo = new Label("PERSONALIZACION DE USUARIO");
-        lbTitulo.setFont(new Font("Arial Rounded MT Bold", 14));
-        
+                
         //Etiqueta genero
-        Label lbGenero = new Label("Escoge tu genero");
-        lbGenero.setFont(new Font("Arial Rounded MT Bold", 14));
+        Label lbGenero = new Label("Elige tu genero");
         
+        //Etiqueta nacimiento
+        Label lbNacimiento = new Label("Fecha de nacimiento");
+                
         //Crea los Radio Buttons
         rbHombre = new RadioButton("HOMBRE");
         rbMujer = new RadioButton("MUJER");
@@ -89,7 +77,8 @@ public class PersonalizacionGenero extends Application {
         
         //Etiqueta estatura
         Label lbEstatura = new Label("Estatura");
-        lbEstatura.setFont(new Font("Arial Rounded MT Bold", 14));
+        
+        //Caja de texto para la estatura
         TextField tfEstatura = new TextField(" ");
         
         //Crea una lista observable para el combo box
@@ -109,31 +98,65 @@ public class PersonalizacionGenero extends Application {
     	  
             } 
         }); 
-            
-        //Crea los separadores
-        Separator separador3 = new Separator();
-        separador3.setPrefSize(270, 100);
-        separador3.setVisible(false);
-        
-        Separator separador4 = new Separator();
-        separador4.setPrefSize(70, 0);
-        separador4.setVisible(false);
-        
+                
         //Crea boton atras
         Button atras= new Button("Atras");
-        atras.setTextFill(Color.BLUE);
-        atras.setPrefSize(60, 10);
-        atras.setLayoutX(10);
-        atras.setLayoutY(450);
-        
+               
         //Crea boton siguiente
         Button siguiente= new Button("Siguiente");
-        siguiente.setTextFill(Color.BLUE);
-        siguiente.setPrefSize(80, 10);
-        siguiente.setAlignment(Pos.BOTTOM_LEFT);
-     
-        root.getChildren().addAll(lbTitulo, lbGenero, rbHombre, rbMujer, fecha, lbEstatura,
-                tfEstatura, cbEstatura, separador3, atras, separador4, siguiente); 
+        
+        //Layout para la parte superior.
+        VBox topRoot = new VBox(lbTitulo, lbGenero);
+
+        //Layout para la parte de los Radio Buttons
+        HBox centerRoot = new HBox(rbHombre, rbMujer);
+        
+        //Espacio entre los Radio Buttons
+        centerRoot.setSpacing(20);
+        
+        //Layout para la fecha y estatura
+        VBox cFecha = new VBox(lbNacimiento, fecha, lbEstatura);
+        
+        //Layout para la estatura,caja de texto y combo box
+        HBox cEsta = new HBox(tfEstatura, cbEstatura);
+        
+        //Layout para la parte inferiror.
+        AnchorPane bottomRoot = new AnchorPane(atras,siguiente);
+       
+        //Layout principal, el cual contendra a los tres layouts anteriores.
+        BorderPane mainRoot = new BorderPane();
+        
+        /*Al utilizar BorderPane como layout princiapl, debemos establecer 
+        la posicion de nuestros layouts secundarios.*/
+        mainRoot.setTop(topRoot);
+        mainRoot.setCenter(centerRoot);
+        mainRoot.setCenter(cFecha);
+        mainRoot.setCenter(cEsta);
+        mainRoot.setBottom(bottomRoot);
+        
+        //Define la distancia entre los Radio Buttons
+        //Establecemos la destancia entre los botones y las esquinas.
+        AnchorPane.setRightAnchor(atras,10.0);
+        AnchorPane.setLeftAnchor(siguiente,10.0);
+        
+        //Creamos y asociamos las clases css para los controles.
+        mainRoot.getStyleClass().add("main-root");
+        topRoot.getStyleClass().add("top-root");
+        centerRoot.getStyleClass().add("center-root");
+        bottomRoot.getStyleClass().add("bottom-root");
+        lbTitulo.getStyleClass().add("title");
+        lbGenero.getStyleClass().add("subtitle");
+        lbNacimiento.getStyleClass().add("subtitle");
+        lbEstatura.getStyleClass().add("subtitle");
+        
+        //Crea una escena y se añade el layout principal
+        Scene escena = new Scene(mainRoot, 350, 700);
+        
+        //Añade hoja de estilos
+        escena.getStylesheets().add("css/Estilo.css");
+        
+        //Añade la escena al escenario
+        escenario.setScene(escena);
         escenario.show();
     }
     
@@ -160,5 +183,8 @@ public class PersonalizacionGenero extends Application {
     // Inicia la aplicación JavaFX llamando a launch()
     launch(args);   
   } 
+
     
-}
+    }
+    
+
